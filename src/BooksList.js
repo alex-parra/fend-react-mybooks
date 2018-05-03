@@ -1,20 +1,12 @@
 import React, {Component} from 'react'
+import { injectState } from "freactal";
 import BookShelf from './BookShelf'
-import Book from './Book'
+
 
 class BooksList extends Component {
 
-  loadBooksList() {
-    typeof(this.props.loadbooks) === 'function' && this.props.loadbooks()
-  }
-
-  componentDidMount() {
-    this.loadBooksList()
-  }
-
   render() {
-    const shelves = this.props.shelves.filter(s => s.key !== 'none')
-    const books = this.props.books
+    const shelves = this.props.state.shelves.filter(s => s.key !== 'none')
 
     return (
       <div className="list-books">
@@ -22,21 +14,12 @@ class BooksList extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <div>
-            {shelves.map(s => {
-              const shelfBooks = books.filter(b => b.shelf === s.key)
-              return (
-                <BookShelf key={s.key} shelf={s} books={shelfBooks}>
-                  {shelfBooks.map(b => <Book key={b.id} book={b} changeshelf={() => this.loadBooksList()} />)}
-                </BookShelf>
-              )
-            })}
-          </div>
+          {shelves.map(s => <BookShelf key={s.key} shelf={s} />)}
         </div>
       </div>
     )
   }
 
-}
+} // class BooksList
 
-export default BooksList
+export default injectState(BooksList)

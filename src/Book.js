@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
-import {update as apiUpdate, shelves} from './BooksAPI'
+import { injectState } from "freactal";
+import _ from 'lodash'
+
 
 class Book extends Component {
 
-  state = {
-    shelf: this.props.book.shelf || 'none'
+  getBookShelf() {
+    const myBook = _.find(this.props.state.books, {id: this.props.book.id})
+    return myBook ? myBook.shelf : 'none'
   }
 
   changeShelf = (ev) => {
-    this.setState({shelf: ev.target.value}, () => {
-      apiUpdate(this.props.book, this.state.shelf).then(() => {
-        typeof(this.props.changeshelf) === 'function' && this.props.changeshelf()
-      });
-    });
+    this.props.effects.setBookShelf(this.props.book, ev.target.value)
   }
 
   render() {
     const book = this.props.book
+    const bookShelf = this.getBookShelf()
 
     let bookImg = null
     if( book.imageLinks ) {
@@ -33,9 +33,9 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={{backgroundImage: 'url('+ bookImg +')'}}></div>
           <div className="book-shelf-changer">
-            <select defaultValue={this.state.shelf} onChange={this.changeShelf}>
+            <select defaultValue={bookShelf} onChange={this.changeShelf}>
               <option value="" disabled>Move to...</option>
-              {shelves.map(s => <option key={s.key} value={s.key}>{s.lbl}</option>)}
+              {this.props.state.shelves.map(s => <option key={s.key} value={s.key}>{s.lbl}</option>)}
             </select>
           </div>
         </div>
@@ -44,7 +44,7 @@ class Book extends Component {
       </div>
     )
   }
-}
 
+} // class Book
 
-export default Book
+export default injectState(Book)

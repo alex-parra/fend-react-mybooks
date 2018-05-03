@@ -1,37 +1,22 @@
 import React from 'react'
-import { Route, Link } from "react-router-dom";
-import * as BooksAPI from './BooksAPI'
+import { Route } from "react-router-dom";
+import { wrapComponentWithState } from "./state";
+import PageHome from './PageHome'
+import PageSearch from './PageSearch'
 import './App.css'
-import BooksList from './BooksList'
-import BooksSearch from './BooksSearch'
 
 
 class BooksApp extends React.Component {
 
-  state = {
-    books: [],
-  }
-
-  loadBooks() {
-    BooksAPI.getAll().then(books => {
-      this.setState({books})
-    })
-  }
-
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={() => (
-          <div>
-            <BooksList shelves={BooksAPI.shelves} books={this.state.books} loadbooks={() => this.loadBooks()} />
-            <div className="open-search"><Link to="/search">Add a book</Link></div>
-          </div>
-        )} />
-
-        <Route path="/search" component={BooksSearch}/>
+        <Route exact path="/" component={PageHome} />
+        <Route path="/search" component={PageSearch}/>
       </div>
     )
   }
-}
 
-export default BooksApp
+} // class BooksApp
+
+export default wrapComponentWithState(BooksApp)

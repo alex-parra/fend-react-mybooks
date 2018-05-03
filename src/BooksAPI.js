@@ -43,9 +43,3 @@ export const search = (query) =>
   }).then(res => res.json())
     .then(data => data.books)
 
-export const shelves = [
-  {key: 'currentlyReading', lbl: 'Currently Reading'},
-  {key: 'wantToRead', lbl: 'Want to Read'},
-  {key: 'read', lbl: 'Read'},
-  {key: 'none', lbl: 'None'},
-]

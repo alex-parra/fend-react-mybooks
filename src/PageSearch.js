@@ -1,16 +1,15 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import Book from './Book'
+import { Link } from "react-router-dom";
+import { injectState } from "freactal";
 import _ from 'lodash'
+import Book from './Book'
 
 
-class BooksSearch extends Component {
+class PageSearch extends Component {
 
   state = {
     query: '',
     loading: false,
-    books: []
   }
 
   isLoading() {
@@ -18,20 +17,12 @@ class BooksSearch extends Component {
   }
 
   noResults() {
-    return (this.state.query.length > 1 && this.state.books.length === 0 && this.state.loading === false)
+    return (this.state.query.length > 1 && this.props.state.searchResults.length === 0 && this.state.loading === false)
   }
 
   searchBooks() {
-    if( this.state.query.length === 0 ) {
-      this.setState({books: []})
-      return
-    }
-
     this.setState({loading: true})
-    BooksAPI.search(this.state.query).then(books => {
-      const booksList = Array.isArray(books) ? books : []
-      this.setState({books: booksList, loading: false})
-    })
+    this.props.effects.searchBooks(this.state.query).then(() => { this.setState({loading: false}) })
   }
 
   handleInputChange = () => {
@@ -52,13 +43,13 @@ class BooksSearch extends Component {
           {this.noResults() && <div className="search-no-results">No books found.</div>}
           {this.isLoading() && <div className="search-no-results">Loading...</div>}
           <ol className="books-grid">
-            {this.state.books.map(b => (<li key={b.id}><Book book={b} /></li>))}
+            {this.props.state.searchResults.map(b => (<li key={b.id}><Book book={b} /></li>))}
           </ol>
         </div>
       </div>
     )
   }
 
-}
+} // class PageSearch
 
-export default BooksSearch
+export default injectState(PageSearch)
