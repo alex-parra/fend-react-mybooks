@@ -102,6 +102,11 @@ body, .app {
 .search-books-results {
   padding: 80px 10px 20px;
 }
+.search-no-results {
+  text-align: center;
+  color: #999;
+  padding-top: 40px;
+}
 
 /* books grid */
 
@@ -117,10 +122,14 @@ body, .app {
 .books-grid li {
   padding: 10px 15px;
   text-align: left;
+  flex: 0 1 200px;
 }
-
+.books-grid li.no-books {
+  flex: 1 1 auto;
+  color: #999;
+}
 .book {
-  width: 140px;
+
 }
 .book-title,
 .book-authors {
@@ -135,7 +144,6 @@ body, .app {
 
 .book-top {
   position: relative;
-  height: 200px;
   display: flex;
   align-items: flex-end;
 }
@@ -164,8 +172,13 @@ body, .app {
 /* book cover */
 
 .book-cover {
+  width: 100%;
+  padding-bottom: 148%;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  background: #eee;
+  background-color: #eee;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .book-cover-title {
   padding: 20px 10px 0;
