@@ -12,6 +12,7 @@ export const wrapComponentWithState = provideState({
       {key: 'none', lbl: 'None'},
     ],
     books: [],
+    searchQuery: '',
     searchResults: []
   }),
 
@@ -26,9 +27,14 @@ export const wrapComponentWithState = provideState({
       console.log('state.js >> effects:loadBooks')
       return API.getAll().then(books => mergeIntoState({books}))
     },
+    setSearch: function(effects, search) {
+      return mergeIntoState({searchQuery: search})
+    },
     searchBooks: function(effects, search) {
-      const p = search ? API.search(search) : Promise.resolve([])
-      return p.then(results => mergeIntoState({searchResults: results.error ? [] : results}))
+      return effects.setSearch(search).then(() => {
+        const p = search ? API.search(search) : Promise.resolve([])
+        return p.then(results => mergeIntoState({searchResults: results.error ? [] : results}))
+      })
     },
     setBookShelf: function(effects, book, shelf) {
       return API.update(book, shelf).then(() => effects.loadBooks()).then(() => mergeIntoState({}))

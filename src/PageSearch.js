@@ -8,42 +8,34 @@ import Book from './Book'
 class PageSearch extends Component {
 
   state = {
-    query: '',
     loading: false,
   }
 
-  isLoading() {
-    return (this.state.loading === true)
-  }
-
   noResults() {
-    return (this.state.query.length > 1 && this.props.state.searchResults.length === 0 && this.state.loading === false)
-  }
-
-  searchBooks() {
-    this.setState({loading: true})
-    this.props.effects.searchBooks(this.state.query).then(() => { this.setState({loading: false}) })
+    const appState = this.props.state
+    return ( !this.state.loading && appState.searchQuery > 1 && appState.searchResults.length === 0)
   }
 
   handleInputChange = () => {
-    this.setState({query: this.search.value}, () => this.searchBooks())
+    this.setState({loading: true})
+    this.props.effects.searchBooks(this.searchInput.value).then(() => { this.setState({loading: false}) })
   }
 
   render() {
-
+    const appState = this.props.state
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" ref={input => this.search = input} onChange={_.debounce(this.handleInputChange, 250)}/>
+            <input type="text" defaultValue={appState.searchQuery} placeholder="Search by title or author" ref={input => this.searchInput = input} onChange={_.debounce(this.handleInputChange, 250)}/>
           </div>
         </div>
         <div className="search-books-results">
           {this.noResults() && <div className="search-no-results">No books found.</div>}
-          {this.isLoading() && <div className="search-no-results">Loading...</div>}
+          {this.state.loading && <div className="search-no-results">Loading...</div>}
           <ol className="books-grid">
-            {this.props.state.searchResults.map(b => (<li key={b.id}><Book book={b} /></li>))}
+            {appState.searchResults.map(b => (<li key={b.id}><Book book={b} /></li>))}
           </ol>
         </div>
       </div>
