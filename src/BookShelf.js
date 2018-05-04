@@ -11,7 +11,7 @@ class BookShelf extends Component {
 
     return (
       <section className="bookshelf" aria-label={'Books Shelf '+ this.props.shelf.lbl}>
-        <h2 className="bookshelf-title">{this.props.shelf.lbl}</h2>
+        <h2 className="bookshelf-title">{this.props.shelf.lbl} <span>{shelfBooks.length} books</span></h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {appState.books.length === 0 && (<li className="no-books">Loading...</li>)}
