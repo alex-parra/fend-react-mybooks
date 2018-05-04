@@ -6,18 +6,20 @@ import Book from './Book'
 class BookShelf extends Component {
 
   render() {
-    const shelfBooks = this.props.state.books.filter(b => b.shelf === this.props.shelf.key)
+    const appState = this.props.state
+    const shelfBooks = appState.books.filter(b => b.shelf === this.props.shelf.key)
 
     return (
-      <div className="bookshelf">
+      <section className="bookshelf" aria-label={'Books Shelf '+ this.props.shelf.lbl}>
         <h2 className="bookshelf-title">{this.props.shelf.lbl}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {shelfBooks.length === 0 && (<li className="no-books">No books to show</li>)}
+            {appState.books.length === 0 && (<li className="no-books">Loading...</li>)}
+            {appState.books.length !== 0 && shelfBooks.length === 0 && (<li className="no-books">No books in this shelf.</li>)}
             {shelfBooks.map(b => <li key={b.id}><Book book={b} /></li>)}
           </ol>
         </div>
-      </div>
+      </section>
     )
   }
 

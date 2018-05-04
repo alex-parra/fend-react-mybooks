@@ -1,11 +1,16 @@
 import React, {Component} from 'react'
 import { injectState } from "freactal";
+import { Route } from 'react-router-dom'
 import _ from 'lodash'
 
 
 class Book extends Component {
 
   getBookShelf() {
+    if( this.props.book.shelf ) {
+      return this.props.book.shelf
+    }
+
     const myBook = _.find(this.props.state.books, {id: this.props.book.id})
     return myBook ? myBook.shelf : 'none'
   }
@@ -29,19 +34,21 @@ class Book extends Component {
     }
 
     return (
-      <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={{backgroundImage: 'url('+ bookImg +')'}}></div>
-          <div className="book-shelf-changer">
-            <select defaultValue={bookShelf} onChange={this.changeShelf}>
-              <option value="" disabled>Move to...</option>
-              {this.props.state.shelves.map(s => <option key={s.key} value={s.key}>{s.lbl}</option>)}
-            </select>
+      <Route render={({history}) => (
+        <article className="book" onClick={() => history.push('/'+ book.id)} aria-label={book.title}>
+          <div className="book-top">
+            <div className="book-cover" style={{backgroundImage: 'url('+ bookImg +')'}}></div>
+            <div className="book-shelf-changer" onClick={ev => ev.stopPropagation()}>
+              <select defaultValue={bookShelf} onChange={this.changeShelf} aria-label={'Change shelf of '+ book.title}>
+                <option value="" disabled>Move to...</option>
+                {this.props.state.shelves.map(s => <option key={s.key} value={s.key}>{s.lbl}</option>)}
+              </select>
+            </div>
           </div>
-        </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{authors}</div>
-      </div>
+          <div className="book-title">{book.title}</div>
+          <div className="book-authors">{authors}</div>
+        </article>
+      )} />
     )
   }
 

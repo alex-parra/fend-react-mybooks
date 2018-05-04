@@ -7,12 +7,10 @@ class PageHome extends Component {
 
   render() {
     return (
-      <div>
+      <main>
         <BooksList />
-        <div className="open-search">
-          <Link to="/search">Add a book</Link>
-        </div>
-      </div>
+        <Link className="open-search" to="/search">Add a book</Link>
+      </main>
     )
   }
 

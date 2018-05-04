@@ -7,17 +7,7 @@ class BooksList extends Component {
 
   render() {
     const shelves = this.props.state.shelves.filter(s => s.key !== 'none')
-
-    return (
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
-        <div className="list-books-content">
-          {shelves.map(s => <BookShelf key={s.key} shelf={s} />)}
-        </div>
-      </div>
-    )
+    return shelves.map(s => <BookShelf key={s.key} shelf={s} />)
   }
 
 } // class BooksList
