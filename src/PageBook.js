@@ -9,22 +9,30 @@ class PageBook extends Component {
 
   state = {
     loaded: false,
-    found: false,
-    book: null,
-    bookId: this.props.match.params.id
+    book: null
   }
 
   componentDidMount() {
     const appState = this.props.state
-    const appStateBook = _.find(appState.books, {id: this.state.bookId})
-    if( appStateBook ) {
-      this.setState({book: appStateBook, loaded: true, found: true})
-      return
+    const bookId = this.props.match.params.id
+
+    // Check if we have this book in one of our shelves
+    const myBooksBook = _.find(appState.books, {id: bookId})
+    if( myBooksBook ) {
+      return this.setState({book: myBooksBook, loaded: true})
     }
-    API.get(this.state.bookId).then(book => {
-      this.setState({book: book, loaded: true, found: true})
+
+    // Not in shelves. Check if found in searchResults
+    const searchBooksBook = _.find(appState.searchResults, {id: bookId})
+    if( searchBooksBook ) {
+      return this.setState({book: searchBooksBook, loaded: true})
+    }
+
+    // Not found in local state. Fetch from API. Propably direct URL access
+    API.get(bookId).then(book => {
+      this.setState({book: book, loaded: true})
     }).catch(err => {
-      this.setState({book: null, loaded: true, found: false})
+      this.setState({book: null, loaded: true})
     })
   }
 
@@ -32,8 +40,8 @@ class PageBook extends Component {
     const appState = this.props.state
     const state = this.state
 
-    if( state.loaded && !state.found ) {
-      return <Page404 />
+    if( state.loaded && _.get(state, 'book.id', false) === false ) {
+      return <Page404 history={this.props.history} />
     }
 
     if( !state.loaded ) {

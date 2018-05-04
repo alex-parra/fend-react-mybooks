@@ -219,7 +219,7 @@ main {
   display: block;
   opacity: .75;
 }
-.page404 button {
+.page404 .goBack {
   padding: .6em 1.8em .7em;
   border-radius: 3px;
   color: #fff;

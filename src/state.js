@@ -24,7 +24,6 @@ export const wrapComponentWithState = provideState({
       return effects.loadBooks().then(() => mergeIntoState({}))
     },
     loadBooks: function(effects) {
-      console.log('state.js >> effects:loadBooks')
       return API.getAll().then(books => mergeIntoState({books}))
     },
     setSearch: function(effects, search) {
