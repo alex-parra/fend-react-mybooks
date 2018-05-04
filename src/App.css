@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 .appHeader {
-  background: #cb0000;
+  background-color: #cb0000;
   box-shadow: 0 0 3px #999;
   flex: 0 0 auto;
   padding: 7px 10px 3px;
@@ -29,8 +29,11 @@
   text-decoration: none;
 }
 .appHeader h1 a::before {
+  background-color: transparent;
+  background-image: url(./icons/logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: 120%;
-  background: transparent url(./icons/logo.png) center no-repeat;
   content: "";
   display: inline-block;
   height: 1.8em;
@@ -38,10 +41,14 @@
   width: 1.8em;
 }
 .appHeader .goBack {
+  background-color: transparent;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
-  background: transparent url('./icons/arrow-back.svg') center no-repeat;
+  border-color: transparent;
+  border-style: solid;
   border-width: 0 10px;
-  border: 0 solid transparent;
   bottom: 0;
   cursor: pointer;
   display: block;
@@ -62,11 +69,11 @@ main {
   padding: 0 0 60px;
 }
 .open-search {
+  background-color: #65b300;
   background-image: url('./icons/add.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background: #65b300;
   border-radius: 50%;
   border: 8px solid transparent;
   bottom: 1.2rem;
@@ -134,11 +141,11 @@ main {
   position: relative;
 }
 .book-shelf-changer {
+  background-color: #cb0000;
   background-image: url('./icons/arrow-drop-down.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background: #cb0000;
   border-radius: 50%;
   border: 5px solid transparent;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
