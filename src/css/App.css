@@ -26,20 +26,20 @@ body {
   overflow: hidden;
 }
 .appLoading {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #999;
+  left: 50%;
   padding: 40px 40px 30px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .appLoading .text {
-  font-size: 1.2rem;
-  text-align: center;
-  margin: 6px 0 0;
   color: #777;
+  font-size: 1.2rem;
+  margin: 6px 0 0;
+  text-align: center;
 }
 .appHeader {
   background-color: #cb0000;
