@@ -2,12 +2,13 @@
 
 A React app to manage books you're reading.  
 
-## TL;DR
+## How to run this app on your machine
 
-To get started developing right away:
+* download or clone this repo
+* install dependencies with `npm install`
+* start development server with `npm start`
+* App opens on http://localhost:3000
 
-* install all project dependencies with `npm install`
-* start the development server with `npm start`
 
 ## Features
 
