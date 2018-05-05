@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import { injectState } from "freactal";
 import _ from 'lodash'
 import Book from './Book'
@@ -45,5 +46,10 @@ class PageSearch extends Component {
   }
 
 } // class PageSearch
+
+PageSearch.propTypes = {
+  state: PropTypes.object.isRequired,
+  effects: PropTypes.object.isRequired,
+}
 
 export default injectState(PageSearch)

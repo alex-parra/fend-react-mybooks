@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { injectState } from "freactal";
+import PropTypes from 'prop-types'
+import { injectState } from 'freactal'
 import { Route } from 'react-router-dom'
 import _ from 'lodash'
 
@@ -45,7 +46,7 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{book.title}</div>
+          <h3 className="book-title">{book.title}</h3>
           <div className="book-authors">{authors}</div>
         </article>
       )} />
@@ -53,5 +54,11 @@ class Book extends Component {
   }
 
 } // class Book
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  effects: PropTypes.object.isRequired,
+}
 
 export default injectState(Book)

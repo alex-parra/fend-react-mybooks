@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import BackButton from './BackButton'
+import PropTypes from 'prop-types';
+
 
 class Page404 extends Component {
 
@@ -15,5 +17,9 @@ class Page404 extends Component {
   }
 
 }
+
+Page404.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default Page404

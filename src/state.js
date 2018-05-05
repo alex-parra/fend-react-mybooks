@@ -5,6 +5,7 @@ import { provideState, mergeIntoState } from "freactal";
 
 export const wrapComponentWithState = provideState({
   initialState: () => ({
+    loading: false,
     shelves: [
       {key: 'currentlyReading', lbl: 'Currently Reading'},
       {key: 'wantToRead', lbl: 'Want to Read'},
@@ -23,8 +24,13 @@ export const wrapComponentWithState = provideState({
     initialize: function(effects) {
       return effects.loadBooks().then(() => mergeIntoState({}))
     },
+    isLoading: function(effects, status) {
+      return mergeIntoState({loading: status})
+    },
     loadBooks: function(effects) {
-      return API.getAll().then(books => mergeIntoState({books}))
+      return effects.isLoading(true).then(() => {
+        return API.getAll().then(books => { effects.isLoading(false); return books}).then(books => mergeIntoState({books}))
+      })
     },
     setSearch: function(effects, search) {
       return mergeIntoState({searchQuery: search})
@@ -36,7 +42,9 @@ export const wrapComponentWithState = provideState({
       })
     },
     setBookShelf: function(effects, book, shelf) {
-      return API.update(book, shelf).then(() => effects.loadBooks()).then(() => mergeIntoState({}))
+      return effects.isLoading(true).then(() => {
+        return API.update(book, shelf).then(() => effects.loadBooks()).then(() => mergeIntoState({}))
+      })
     }
   },
 
