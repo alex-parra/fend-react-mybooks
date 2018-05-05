@@ -18,7 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "ghpages": "git subtree push --prefix build origin gh-pages"
+    "ghpages": "npm run build && mkdir -p docs && rsync -av ./build/ ./docs"
   },
   "OFF": {
     "eject": "react-scripts eject"
