@@ -2,6 +2,12 @@
 
 A React app to manage books you're reading.  
 
+## Demo
+See https://mybooks.alexpds.com  
+```
+NOTE: The docs folder is used to serve the app via GitHub Pages
+```
+
 ## How to run this app on your machine
 
 * download or clone this repo
