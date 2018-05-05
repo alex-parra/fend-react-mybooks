@@ -159,11 +159,11 @@ main {
   font-size: 1.8rem;
 }
 .bookshelf-title span {
+  color: #444;
   display: inline-block;
   font-size: .85em;
   font-weight: normal;
   margin-left: 10px;
-  opacity: .75;
   text-transform: none;
 }
 .books-grid {
