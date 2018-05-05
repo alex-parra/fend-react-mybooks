@@ -28,6 +28,7 @@ class Book extends Component {
     if( book.imageLinks ) {
       bookImg = book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || null
     }
+    bookImg = bookImg.replace('http://', 'https://')
 
     let authors = '- Unknown -'
     if( Array.isArray(book.authors) ) {
