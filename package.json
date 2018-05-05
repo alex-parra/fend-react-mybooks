@@ -1,4 +1,6 @@
 {
+  "name": "mybooks",
+  "description": "MyBooks by Alex Parra",
   "dependencies": {
     "freactal": "^2.0.3",
     "lodash": "^4.17.10",
@@ -16,6 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "ghpages": "git subtree push --prefix build origin gh-pages"
+  },
+  "OFF": {
     "eject": "react-scripts eject"
   }
 }
