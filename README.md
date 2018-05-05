@@ -28,7 +28,7 @@ A React app to manage books you're reading.
 
 
 ## API Book Interface
-´´´
+```
 book: {
     id: string:book-alphanum-id
     title: string
@@ -55,7 +55,7 @@ book: {
     readingModes: {text: bool, image: bool}
     subtitle: string (not-always-available)
 }
-´´´
+```
 
 
 
