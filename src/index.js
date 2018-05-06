@@ -7,11 +7,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 initReactFastclick()
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  , document.getElementById('root')
-)
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'))
 
 registerServiceWorker()

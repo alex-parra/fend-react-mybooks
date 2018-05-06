@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "ghpages": "yarn build && mkdir -p docs && rsync -av ./build/ ./docs"
+    "ghpages": "yarn build && mkdir -p docs && rsync -av ./build/ ./docs",
+    "serve": "php -S localhost:3001 -t ./docs"
   },
   "OFF": {
     "eject": "react-scripts eject"
